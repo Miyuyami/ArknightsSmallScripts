@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DisplayFurnitureThemeFastSetup": {
+      "commandName": "Project",
+      "commandLineArgs": "all"
+    }
+  }
+}
