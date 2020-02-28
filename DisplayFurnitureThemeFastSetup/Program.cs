@@ -11,7 +11,7 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
         // ColumnName - min padding
         private static Dictionary<string, int> Columns = new Dictionary<string, int>()
         {
-            { "Number", 1 },
+            { "Count", 1 },
             { "Furniture Name", 1 },
             { "Ambience", 4 },
             { "Cost", 4 },
