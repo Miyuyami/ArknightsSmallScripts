@@ -114,9 +114,9 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
 
                 Console.WriteLine(
                     $"{name.PadRight(columnPaddings[1])} | " +
-                    $"{count.ToString().PadRight(columnPaddings[0])} | " +
-                    $"{CalculateAmbience(furniture).ToString().PadRight(columnPaddings[2])} | " +
-                    $"{CalculateCost(furniture).ToString().PadRight(columnPaddings[3])}"
+                    $"{count.ToString().PadLeft(columnPaddings[0])} | " +
+                    $"{CalculateAmbience(furniture).ToString().PadLeft(columnPaddings[2])} | " +
+                    $"{CalculateCost(furniture).ToString().PadLeft(columnPaddings[3])}"
                 );
             }
         }
