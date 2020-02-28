@@ -8,6 +8,15 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
 {
     public class Program
     {
+        // ColumnName - min padding
+        private static Dictionary<string, int> Columns = new Dictionary<string, int>()
+        {
+            { "Number", 1 },
+            { "Furniture Name", 1 },
+            { "Ambience", 4 },
+            { "Cost", 4 },
+        };
+
         private static void Main(string[] args)
         {
             if (args.Length < 1)
@@ -75,7 +84,27 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
             var ordered = d.OrderBy(kvp => customData.Groups.Values.Select((g, i) => (g, i))
                                                                    .First(t => t.g.Furniture.Contains(kvp.Key)).i)
                            .ThenBy(kvp => customData.Groups.Values.SelectMany(g => g.Furniture.Select((s, i) => (s, i)))
-                                                                   .First(t => t.s == kvp.Key).i);
+                                                                   .First(t => t.s == kvp.Key).i)
+                           .ToList();
+
+            var longestName = ordered.Max(kvp => customData.Furnitures[kvp.Key].Name.Length);
+            var columnPaddings = new List<int>()
+            {
+                CalculatePadding(1),
+                CalculatePadding(2, longestName),
+                CalculatePadding(3),
+                CalculatePadding(4),
+            };
+            var columnHeaders = Columns.Keys.ToList();
+
+            Console.WriteLine(new string('-', columnPaddings.Sum() + columnPaddings.Count * 3));
+            Console.WriteLine(
+                $"{columnHeaders[1].PadRight(columnPaddings[1])} | " +
+                $"{columnHeaders[0].PadRight(columnPaddings[0])} | " +
+                $"{columnHeaders[2].PadRight(columnPaddings[2])} | " +
+                $"{columnHeaders[3].PadRight(columnPaddings[3])}"
+            );
+            Console.WriteLine(new string('-', columnPaddings.Sum() + columnPaddings.Count * 3));
 
             foreach (var kvp in ordered)
             {
@@ -83,8 +112,22 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
                 string name = furniture.Name;
                 int count = kvp.Value;
 
-                Console.WriteLine($"{count} - {name} - ({CalculateAmbience(furniture)}x{count} ambience) - ({CalculateCost(furniture)}x{count} cost)");
+                Console.WriteLine(
+                    $"{name.PadRight(columnPaddings[1])} | " +
+                    $"{count.ToString().PadRight(columnPaddings[0])} | " +
+                    $"{CalculateAmbience(furniture).ToString().PadRight(columnPaddings[2])} | " +
+                    $"{CalculateCost(furniture).ToString().PadRight(columnPaddings[3])}"
+                );
             }
+        }
+
+        private static int CalculatePadding(int columnNumber, int minPadding = 0)
+        {
+            int columnIndex = columnNumber - 1;
+            int columnNamePadding = Columns.Keys.Skip(columnIndex).First().Length;
+            int columnMinPadding = Columns.Values.Skip(columnIndex).First();
+
+            return Math.Max(minPadding, Math.Max(columnNamePadding, columnMinPadding));
         }
 
         private static int CalculateAmbience(CustomData customData, Dictionary<string, int> d)
