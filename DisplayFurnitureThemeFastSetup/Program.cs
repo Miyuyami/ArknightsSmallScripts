@@ -70,6 +70,7 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
             }
 
             Console.WriteLine("Total ambience: " + CalculateAmbience(customData, d));
+            Console.WriteLine("Total cost: " + CalculateCost(customData, d));
 
             var ordered = d.OrderBy(kvp => customData.Groups.Values.Select((g, i) => (g, i))
                                                                    .First(t => t.g.Furniture.Contains(kvp.Key)).i)
@@ -78,21 +79,41 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
 
             foreach (var kvp in ordered)
             {
-                string name = customData.Furnitures[kvp.Key].Name;
+                var furniture = customData.Furnitures[kvp.Key];
+                string name = furniture.Name;
                 int count = kvp.Value;
 
-                Console.WriteLine($"{count} - {name}");
+                Console.WriteLine($"{count} - {name} - ({CalculateAmbience(furniture)}x{count} ambience) - ({CalculateCost(furniture)}x{count} cost)");
             }
         }
 
         private static int CalculateAmbience(CustomData customData, Dictionary<string, int> d)
         {
-            int piecesAmbience = d.Sum(kvp => customData.Furnitures[kvp.Key].Comfort * kvp.Value);
+            int piecesAmbience = d.Sum(kvp => CalculateAmbience(customData.Furnitures[kvp.Key]) * kvp.Value);
             int setsAmbience = d.Select(kvp => customData.Groups.Values.First(g => g.Furniture.Contains(kvp.Key)).Id)
                                 .ToHashSet()
                                 .Sum(s => customData.Groups[s].Comfort);
 
             return piecesAmbience + setsAmbience;
+        }
+
+        private static int CalculateAmbience(Furniture furniture)
+        {
+            return furniture.Comfort;
+        }
+
+        private static int CalculateCost(CustomData customData, Dictionary<string, int> d)
+        {
+            int piecesCost = d.Sum(kvp => CalculateCost(customData.Furnitures[kvp.Key]) * kvp.Value);
+
+            return piecesCost;
+        }
+
+        private static int CalculateCost(Furniture furniture)
+        {
+            var value = furniture.ProcessedProductCount * 2;
+            value -= value % 5;
+            return value;
         }
 
         private static void DisplayHelp()
