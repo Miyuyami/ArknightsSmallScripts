@@ -35,30 +35,39 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
                 buildingDataJsonPath = @"GameData\building_data.json";
             }
 
-            var baseData = BaseData.FromJson(File.ReadAllText(buildingDataJsonPath));
-
-            if (args[0] == "all")
+            try
             {
-                DisplayAllThemes(baseData.CustomData);
-                return;
-            }
+                var baseData = BaseData.FromJson(File.ReadAllText(buildingDataJsonPath));
 
-            if (!baseData.CustomData.Themes.TryGetValue(args[0], out Theme theme))
-            {
-                Console.WriteLine("theme id not found");
-                Console.WriteLine("looking for theme by name");
-
-                theme = baseData.CustomData.Themes.Values.FirstOrDefault(t => t.Name.Contains(args[0], StringComparison.OrdinalIgnoreCase));
-                if (theme == null)
+                if (args[0] == "all")
                 {
-                    Console.WriteLine("theme name not found");
-                    Console.WriteLine();
-                    DisplayHelp();
+                    DisplayAllThemes(baseData.CustomData);
                     return;
                 }
-            }
 
-            DisplayTheme(baseData.CustomData, theme);
+                if (!baseData.CustomData.Themes.TryGetValue(args[0], out Theme theme))
+                {
+                    Console.WriteLine("theme id not found");
+                    Console.WriteLine("looking for theme by name");
+
+                    theme = baseData.CustomData.Themes.Values.FirstOrDefault(t => t.Name.Contains(args[0], StringComparison.OrdinalIgnoreCase));
+                    if (theme == null)
+                    {
+                        Console.WriteLine("theme name not found");
+                        Console.WriteLine();
+                        DisplayHelp();
+                        return;
+                    }
+                }
+
+                DisplayTheme(baseData.CustomData, theme);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.WriteLine();
+                DisplayHelp();
+            }
         }
 
         private static void DisplayAllThemes(CustomData customData)
