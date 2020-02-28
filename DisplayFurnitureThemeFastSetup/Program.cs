@@ -25,7 +25,17 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
                 return;
             }
 
-            var baseData = BaseData.FromJson(File.ReadAllText(@"GameData\building_data.json"));
+            string buildingDataJsonPath;
+            if (args.Length >= 2)
+            {
+                buildingDataJsonPath = args[1];
+            }
+            else
+            {
+                buildingDataJsonPath = @"GameData\building_data.json";
+            }
+
+            var baseData = BaseData.FromJson(File.ReadAllText(buildingDataJsonPath));
 
             if (args[0] == "all")
             {
@@ -162,7 +172,8 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
         private static void DisplayHelp()
         {
             Console.WriteLine("needs at least 1 argument as following:");
-            Console.WriteLine("- furniture theme ID or NAME or \"all\" for all");
+            Console.WriteLine("- 1: furniture theme ID or NAME or \"all\" for all");
+            Console.WriteLine("- 2: (optional) path to building_data.json; empty for default \"GameData\\building_data.json\"");
         }
     }
 }
