@@ -561,12 +561,13 @@ namespace Arknights.Data
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Location
     {
+        [EnumMember(Value = "NONE")] None,
+        [EnumMember(Value = "WALL")] Wall,
+        [EnumMember(Value = "FLOOR")] Floor,
         [EnumMember(Value = "CARPET")] Carpet,
         [EnumMember(Value = "CEILING")] Ceiling,
-        [EnumMember(Value = "FLOOR")] Floor,
-        [EnumMember(Value = "NONE")] None,
         [EnumMember(Value = "POSTER")] Poster,
-        [EnumMember(Value = "WALL")] Wall,
+        [EnumMember(Value = "CEILINGDECAL")] CeilingDecal,
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
