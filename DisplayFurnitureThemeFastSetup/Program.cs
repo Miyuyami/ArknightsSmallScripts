@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Arknights.Data;
 
 namespace Arknights.DisplayFurnitureThemeFastSetup
@@ -19,6 +20,8 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
 
         private static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.Unicode;
+
             if (args.Length < 1)
             {
                 DisplayHelp();
