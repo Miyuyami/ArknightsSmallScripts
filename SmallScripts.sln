@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisplayFurnitureThemeFastSe
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{1B72839D-A05D-442D-9197-5A5365C5F4EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportFurnitureToCsv", "ExportFurnitureToCsv\ExportFurnitureToCsv.csproj", "{ABB0AD8D-5599-411C-9717-D98FF12D3DD6}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Shared\Shared.projitems*{1b72839d-a05d-442d-9197-5a5365c5f4eb}*SharedItemsImports = 13
@@ -20,6 +22,10 @@ Global
 		{019EE27A-97CC-4AD2-AA1A-343330CB67CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019EE27A-97CC-4AD2-AA1A-343330CB67CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019EE27A-97CC-4AD2-AA1A-343330CB67CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABB0AD8D-5599-411C-9717-D98FF12D3DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABB0AD8D-5599-411C-9717-D98FF12D3DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABB0AD8D-5599-411C-9717-D98FF12D3DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABB0AD8D-5599-411C-9717-D98FF12D3DD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

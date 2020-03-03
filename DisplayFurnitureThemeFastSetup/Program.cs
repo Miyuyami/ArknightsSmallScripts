@@ -185,7 +185,7 @@ namespace Arknights.DisplayFurnitureThemeFastSetup
         {
             Console.WriteLine("needs at least 1 argument as following:");
             Console.WriteLine("- 1: furniture theme ID or NAME or \"all\" for all");
-            Console.WriteLine("- 2: (optional) path to building_data.json; empty for default \"GameData\\building_data.json\"");
+            Console.WriteLine("- 2: (optional) path to building_data.json; empty to default to \"GameData\\building_data.json\"");
         }
     }
 }
